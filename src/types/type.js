@@ -15,4 +15,8 @@ export default class Type {
     // types are immutable singletons
     Object.freeze(this);
   }
+
+  valueOf() {
+    return this.name;
+  }
 }
