@@ -1,5 +1,5 @@
 import { NotFinalizedError, IntermediateTypeError } from "./errors";
-import ConfigObject from "./config-objects/config-object";
+import ConfigObject from "./config-object/config-object";
 
 const parser = {
   validate(obj, { finalized = false, path = [] } = {}) {

@@ -6,7 +6,7 @@ import {
   number,
   array,
   invalid
-} from "./types";
+} from "../types";
 
 const CUSTOM_PRIMITIVE_TYPES = Object.freeze({
   ARRAY: "array"
