@@ -4,7 +4,7 @@ const required = new Type({
   name: "required",
   base: true,
   finalizeable: false,
-  intermediary: false
+  intermediary: true
 });
 
 export default required;

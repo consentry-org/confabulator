@@ -4,7 +4,7 @@ const optional = new Type({
   name: "required",
   base: true,
   finalizeable: true,
-  intermediary: false
+  intermediary: true
 });
 
 export default optional;

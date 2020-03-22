@@ -5,7 +5,6 @@ import {
   string,
   number,
   array,
-  runtime,
   invalid
 } from "./types";
 
@@ -14,7 +13,7 @@ const CUSTOM_PRIMITIVE_TYPES = Object.freeze({
 });
 
 // map of name -> type
-const TYPES = Object.freeze(
+export const TYPES = Object.freeze(
   Object.assign(...([
     required,
     optional,
@@ -22,14 +21,13 @@ const TYPES = Object.freeze(
     string,
     number,
     array,
-    runtime,
     invalid
   ].map(type => ({
     [type.name]: type
   }))))
 );
 
-class ConfigObject {
+export default class ConfigObject {
   constructor({
     type,
     chainedType,
@@ -60,21 +58,26 @@ class ConfigObject {
     }
     return typeof(value);
   }
+
+  static make(name, chained) {
+    const type = TYPES[name] || TYPES.invalid;
+    return new Proxy(new ConfigObject({
+      ...(chained || {}),
+      value: +type === +TYPES.invalid
+        ? name
+        : (chained && chained.value),
+      type
+    }), ConfigObject._handlers);
+  }
+
+  static get _handlers() {
+    return {
+      get: (obj, prop) => ConfigObject.make(prop, obj),
+
+      apply: (target, obj, args) => { // eslint-disable-line no-unused-vars
+        // TODO: implement
+      }
+    };
+  }
 }
 
-const handlers = {
-  get: (obj, prop) => {
-    const type = TYPES[prop] || TYPES.invalid;
-    return new Proxy(new ConfigObject({
-      ...obj,
-      value: +type === +TYPES.invalid
-        ? prop
-        : obj.value,
-      type
-    }), handlers);
-  },
-
-  apply: (target, obj, args) => { // eslint-disable-line no-unused-vars
-    // TODO: implement
-  }
-};
