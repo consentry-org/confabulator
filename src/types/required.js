@@ -3,7 +3,7 @@ import Type from "./type";
 const required = new Type({
   name: "required",
   base: true,
-  finalizeable: false,
+  finalizable: false,
   intermediary: true
 });
 

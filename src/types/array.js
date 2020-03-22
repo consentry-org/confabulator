@@ -1,9 +1,10 @@
 import Type from "./type";
+import ATTR from "./attributes";
 
 const array = new Type({
   name: "array",
   base: false,
-  finalizable: false,
+  finalizable: ATTR.inherit,
   intermediary: false
 });
 

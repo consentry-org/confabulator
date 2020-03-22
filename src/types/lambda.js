@@ -1,11 +1,11 @@
 import Type from "./type";
 import ATTR from "./attributes";
 
-const or = new Type({
-  name: "or",
+const lambda = new Type({
+  name: "code",
   base: false,
-  finalizable: ATTR.inherit,
+  finalizeable: ATTR.inherit,
   intermediary: true
 });
 
-export default or;
+export default lambda;

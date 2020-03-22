@@ -27,6 +27,8 @@ export const TYPES = Object.freeze(
   }))))
 );
 
+console.log("TYPES:", TYPES);
+
 export default class ConfigObject {
   constructor({
     type,
@@ -62,7 +64,7 @@ export default class ConfigObject {
   static make(name, chained) {
     const type = TYPES[name] || TYPES.invalid;
     return new Proxy(new ConfigObject({
-      ...(chained || {}),
+      chainedType: chained,
       value: +type === +TYPES.invalid
         ? name
         : (chained && chained.value),
